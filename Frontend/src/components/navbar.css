@@ -1,0 +1,34 @@
+/* -------- NAVBAR -------- */
+
+.nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 10%;
+  position:sticky;
+  top:0;
+  backdrop-filter:blur(10px);
+  background:rgba(255,255,255,0.05);
+  border-bottom:1px solid rgba(255,255,255,0.1);
+}
+
+.nav h2{
+  font-size:24px;
+  color:#38bdf8;
+}
+
+.nav ul{
+  display:flex;
+  gap:40px;
+  list-style:none;
+}
+
+.nav ul li{
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.nav ul li:hover{
+  color:#38bdf8;
+  transform:scale(1.1);
+}

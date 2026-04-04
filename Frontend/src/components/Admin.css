@@ -1,0 +1,92 @@
+/* ---------- ADMIN DASHBOARD ---------- */
+
+.admin{
+  padding:60px 10%;
+  background:#0f172a;
+  min-height:100vh;
+  color:#e2e8f0;
+}
+
+/* HEADER */
+
+.admin h2{
+  color:#38bdf8;
+  margin-bottom:25px;
+  font-size:28px;
+  text-align:center;
+}
+
+/* TABLE CONTAINER */
+
+.table-container{
+  overflow-x:auto;
+  border-radius:12px;
+  background:#020617;
+  box-shadow:0 10px 40px rgba(0,0,0,0.5);
+  border:1px solid #1e293b;
+}
+
+/* TABLE */
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+/* HEAD */
+
+th{
+  background:#1e293b;
+  color:#38bdf8;
+  padding:14px;
+  text-align:left;
+  font-weight:600;
+  font-size:14px;
+}
+
+/* BODY */
+
+td{
+  padding:12px;
+  border-bottom:1px solid #1e293b;
+  color:#cbd5f5;
+  font-size:14px;
+}
+
+/* ROW HOVER */
+
+tr:hover{
+  background:#020617;
+  transform:scale(1.01);
+  transition:0.2s;
+}
+
+/* DELETE BUTTON */
+
+button{
+  padding:6px 12px;
+  border:none;
+  background:#ef4444;
+  color:white;
+  cursor:pointer;
+  border-radius:6px;
+  font-size:13px;
+  transition:0.3s;
+}
+
+button:hover{
+  background:#dc2626;
+  transform:scale(1.05);
+  box-shadow:0 0 10px rgba(239,68,68,0.5);
+}
+
+/* SCROLLBAR (optional 🔥) */
+
+.table-container::-webkit-scrollbar{
+  height:6px;
+}
+
+.table-container::-webkit-scrollbar-thumb{
+  background:#38bdf8;
+  border-radius:10px;
+}
