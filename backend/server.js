@@ -10,10 +10,9 @@ app.use(express.json());
 
 // Email Transporter (use ENV in production)
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
+  host: "74.125.24.108", // 🔥 Gmail IPv4 (important)
   port: 465,
   secure: true,
-  family: 4,
   auth: {
     user: process.env.EMAIL_USER, // your gmail
     pass: process.env.EMAIL_PASS  // app password
