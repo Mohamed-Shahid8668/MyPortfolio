@@ -17,7 +17,7 @@ function Hero() {
 
       <div className="hero-buttons">
       <a
-  href="https://raw.githubusercontent.com/Mohamed-Shahid8668/my-pro/main/Mohamed_Sahid_Resume%20New%20format.pdf"
+  href="https://github.com/Mohamed-Shahid8668/my-pro/blob/5d64e1ccae72586f5e14ecd4085e27e37e7ad7a6/Mohamed_Sahid_M_FlowCV_Resume_2026-04-05.pdf"
   target="_blank"
   rel="noopener noreferrer">
   <button className="btn">Download Resume</button>
