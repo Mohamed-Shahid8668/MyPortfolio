@@ -40,9 +40,11 @@ app.post("/contact", async (req, res) => {
     console.log("✅ Email Sent via SendGrid");
     res.send("✅ Message sent successfully!");
   } catch (error) {
-    console.error("❌ SENDGRID ERROR:", error.response?.body || error.message);
-    res.status(500).send("❌ Failed to send message");
-  }
+  console.error("SENDGRID FULL ERROR:", error.response?.body || error.message);
+  res.status(500).send(
+    error.response?.body?.errors?.[0]?.message || error.message
+  );
+}
 });
 
 // Test route
