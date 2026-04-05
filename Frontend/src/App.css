@@ -72,7 +72,7 @@ h1,h2,h3{
 /* ---------- HERO ---------- */
 
 .hero{
-  height:85vh;
+  height:fit-content;
   display:flex;
   flex-direction:column;
   align-items:start;
