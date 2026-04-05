@@ -24,14 +24,18 @@ app.post("/contact", async (req, res) => {
 
   const msg = {
     to: process.env.EMAIL_USER, // your email
-    from: process.env.EMAIL_USER, // MUST be verified in SendGrid
+    from: process.env.EMAIL_USER,
+    name: "Mohamed Sahid", // MUST be verified in SendGrid
     subject: `New Message: ${subject}`,
     html: `
-      <h3>New Contact Message</h3>
-      <p><b>Name:</b> ${name}</p>
-      <p><b>Email:</b> ${email}</p>
-      <p><b>Subject:</b> ${subject}</p>
-      <p><b>Message:</b> ${message}</p>
+  <div style="font-family: Arial; padding: 10px;">
+    <h2 style="color:#2563eb;">📩 New Contact Message</h2>
+    <p><strong>Name:</strong> ${name}</p>
+    <p><strong>Email:</strong> ${email}</p>
+    <p><strong>Subject:</strong> ${subject}</p>
+    <hr/>
+    <p>${message}</p>
+  </div>
     `,
   };
 
