@@ -45,8 +45,8 @@ app.post("/contact", async (req, res) => {
     console.log("✅ Email Sent");
     res.send("✅ Message sent successfully!");
   } catch (error) {
-    console.error("❌ EMAIL ERROR:", error);
-    res.status(500).send("Email failed");
+    console.error("❌ EMAIL ERROR FULL :", error);
+    res.status(500).send(error.message || "❌ Failed to send message");
   }
 });
 

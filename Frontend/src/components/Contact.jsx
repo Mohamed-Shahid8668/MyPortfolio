@@ -15,8 +15,11 @@ function Contact() {
     subject: "",
     message: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const [success, setSuccess] = useState("");
+
+
 
   const copyText = (text) => {
     navigator.clipboard.writeText(text);
@@ -32,28 +35,41 @@ function Contact() {
 
   const handleSubmit = async (e) => {
   e.preventDefault();
+    setLoading(true);
+    setSuccess(""); 
 
-  try {
-    const res = await fetch("https://portfolio-backend-1dxj.onrender.com/contact", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
+ try {
+    const res = await fetch(
+      "https://portfolio-backend-1dxj.onrender.com/contact",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      }
+    );
 
     const data = await res.text();
-    setSuccess("✅ Message sent successfully!");
 
-    setFormData({
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
-    });
+    if (res.ok) {
+      setSuccess("✅ Message sent successfully!");
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+    } else {
+      setSuccess("❌ " + data);
+    }
 
   } catch (error) {
-    setSuccess("❌ Failed to send message");
+    console.error(error);
+    setSuccess("❌ Server not responding");
+  }
+  finally {
+    setLoading(false);     // 🔥 stop loading
   }
 };
 
@@ -159,7 +175,9 @@ function Contact() {
             required
           ></textarea>
 
-          <button type="submit">Send Message</button>
+          <button type="submit" disabled={loading}>
+  {loading ? "Sending..." : "Send Message"}
+</button>
         </form>
       </div>
 
