@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const nodemailer = require("nodemailer");
+const sgMail = require("@sendgrid/mail");
 
 const app = express();
 
@@ -8,18 +8,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Email Transporter (use ENV in production)
-const transporter = nodemailer.createTransport({
-  host: "74.125.24.108", // 🔥 Gmail IPv4 (important)
-  port: 465,
-  secure: true,
-  auth: {
-    user: process.env.EMAIL_USER, // your gmail
-    pass: process.env.EMAIL_PASS  // app password
-  }
-});
+// 🔐 Set SendGrid API Key
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-// 📩 Contact Route (EMAIL ONLY)
+// 📩 Contact Route
 app.post("/contact", async (req, res) => {
   console.log("BODY:", req.body);
 
@@ -30,25 +22,26 @@ app.post("/contact", async (req, res) => {
     return res.status(400).send("All fields are required");
   }
 
-  try {
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER, // receive email
-      subject: `New Message: ${subject}`,
-      html: `
-        <h3>New Contact Message</h3>
-        <p><b>Name:</b> ${name}</p>
-        <p><b>Email:</b> ${email}</p>
-        <p><b>Subject:</b> ${subject}</p>
-        <p><b>Message:</b> ${message}</p>
-      `
-    });
+  const msg = {
+    to: process.env.EMAIL_USER, // your email
+    from: process.env.EMAIL_USER, // MUST be verified in SendGrid
+    subject: `New Message: ${subject}`,
+    html: `
+      <h3>New Contact Message</h3>
+      <p><b>Name:</b> ${name}</p>
+      <p><b>Email:</b> ${email}</p>
+      <p><b>Subject:</b> ${subject}</p>
+      <p><b>Message:</b> ${message}</p>
+    `,
+  };
 
-    console.log("✅ Email Sent");
+  try {
+    await sgMail.send(msg);
+    console.log("✅ Email Sent via SendGrid");
     res.send("✅ Message sent successfully!");
   } catch (error) {
-    console.error("❌ EMAIL ERROR FULL :", error);
-    res.status(500).send(error.message || "❌ Failed to send message");
+    console.error("❌ SENDGRID ERROR:", error.response?.body || error.message);
+    res.status(500).send("❌ Failed to send message");
   }
 });
 
